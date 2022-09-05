@@ -1,0 +1,50 @@
+﻿@page "/students"
+@using BlazorServer.Data
+
+<h3>Students</h3>
+
+<table class="table" onbeforeprint="GetStudents()">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Index</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Student student in students)
+        {
+            <tr>
+                <td>@student.Id</td>
+                <td>@student.Name</td>
+                <td>@student.IndexNumber</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    public List<Student> students = new();
+
+    public void AddStudent()
+    {
+        Student Student1 = new();
+        Student1.Id = 1;
+        Student1.Name = "Sławek";
+        Student1.IndexNumber = 60473;
+
+        Student Student2 = new();
+        Student2.Id = 2;
+        Student2.Name = "Adam";
+        Student2.IndexNumber = 30475;
+
+        students.Add(Student1);
+        students.Add(Student2);
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        AddStudent();
+        return base.OnInitializedAsync();
+    }
+}
